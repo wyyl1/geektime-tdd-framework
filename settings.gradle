@@ -1,0 +1,4 @@
+rootProject.name = 'geektime-tdd-framework'
+include 'container'
+include 'restful'
+

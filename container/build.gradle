@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'com.wyyl1'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("jakarta.inject:jakarta.inject-api:2.0.1")
+    implementation 'com.google.guava:guava:31.1-jre'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation 'org.mockito:mockito-core:4.5.1'
+}
+
+test {
+    useJUnitPlatform()
+}
