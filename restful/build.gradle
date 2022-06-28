@@ -17,6 +17,10 @@ dependencies {
     implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     implementation 'jakarta.ws.rs:jakarta.ws.rs-api:3.1.0'
     implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
+    implementation 'org.slf4j:slf4j-api:2.0.0-alpha7'
+    implementation 'ch.qos.logback:logback-core:1.3.0-alpha16'
+    testImplementation 'ch.qos.logback:logback-classic:1.3.0-alpha16'
 
     implementation(project(':container'))
 
