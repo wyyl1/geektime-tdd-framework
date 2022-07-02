@@ -1,5 +1,6 @@
 package geektime.tdd.rest;
 
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,7 +12,6 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.MessageBodyWriter;
 import jakarta.ws.rs.ext.Providers;
 import jakarta.ws.rs.ext.RuntimeDelegate;
-
 import java.io.IOException;
 import java.util.function.Supplier;
 
@@ -27,7 +27,6 @@ public class ResourceServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ResourceRouter router = runtime.getResourceRouter();
-
         respond(resp, () -> router.dispatch(req, runtime.createResourceContext(req, resp)));
     }
 
@@ -43,15 +42,12 @@ public class ResourceServlet extends HttpServlet {
 
     private void respond(HttpServletResponse resp, OutboundResponse response) throws IOException {
         resp.setStatus(response.getStatus());
-
         MultivaluedMap<String, Object> headers = response.getHeaders();
-        for (String name : headers.keySet()) {
+        for (String name : headers.keySet())
             for (Object value : headers.get(name)) {
                 RuntimeDelegate.HeaderDelegate headerDelegate = RuntimeDelegate.getInstance().createHeaderDelegate(value.getClass());
                 resp.addHeader(name, headerDelegate.toString(value));
             }
-        }
-
         GenericEntity entity = response.getGenericEntity();
         if (entity != null) {
             MessageBodyWriter writer = providers.getMessageBodyWriter(entity.getRawType(), entity.getType(), response.getAnnotations(), response.getMediaType());
@@ -65,3 +61,4 @@ public class ResourceServlet extends HttpServlet {
         return (OutboundResponse) mapper.toResponse(throwable);
     }
 }
+
